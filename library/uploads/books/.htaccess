@@ -1,0 +1,7 @@
+# Only allow images to be served from this folder
+<FilesMatch "\.(php|phtml|php[0-9]|phar)$">
+    Require all denied
+</FilesMatch>
+<Files "index.php">
+    Require all granted
+</Files>

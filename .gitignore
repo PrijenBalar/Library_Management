@@ -1,0 +1,18 @@
+# Python virtual environment (not part of the project)
+.venv/
+
+# Too large for GitHub (over 100 MB).
+# The XAMPP installer can be downloaded from https://www.apachefriends.org/download.html
+xampp setup/*.exe
+# The full project zip is shared separately (Google Drive)
+*.zip
+
+# Book pictures uploaded by the admin while testing (the 12 sample covers are kept)
+library/uploads/books/book_*
+
+# Editor / OS files
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+~$*

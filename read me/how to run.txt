@@ -1,0 +1,264 @@
+=====================================================================
+   ONLINE LIBRARY MANAGEMENT SYSTEM  -  HOW TO RUN THE WEBSITE
+   (Windows 10 / Windows 11 with XAMPP)
+=====================================================================
+
+Before running, complete all steps in  "installation.txt"  once.
+(XAMPP is NOT installed yet on a new PC? The installer is included
+ in the project:  xampp setup\xampp-windows-x64-8.2.12-installer.exe
+ Double-click it, install to C:\xampp, then follow installation.txt.)
+After that, use the steps below EVERY TIME you want to run the site.
+
+
+---------------------------------------------------------------------
+ PART A : START THE SERVER (every time you restart the computer)
+---------------------------------------------------------------------
+ 1. Click Start Menu -> type  XAMPP  -> open  "XAMPP Control Panel".
+ 2. Click  Start  next to  Apache   (row turns green).
+ 3. Click  Start  next to  MySQL    (row turns green).
+ 4. Keep the XAMPP Control Panel window open (you can minimise it).
+
+ To STOP the server later, click  Stop  on both rows, then close
+ the Control Panel.
+
+
+---------------------------------------------------------------------
+ PART B : OPEN THE WEBSITE
+---------------------------------------------------------------------
+ Open Google Chrome / Edge / Firefox and type one of these URLs :
+
+   STUDENT WEBSITE  :   http://localhost/library/
+   ADMIN PANEL      :   http://localhost/library/admin/
+   phpMyAdmin (DB)  :   http://localhost/phpmyadmin
+
+ (If you changed the Apache port to 8080 during installation, use
+  http://localhost:8080/library/  instead.)
+
+ All usernames and passwords are in   "pass.txt".
+
+
+---------------------------------------------------------------------
+ PART C : HOW THE WEBSITE LOOKS
+---------------------------------------------------------------------
+ After login every page has:
+   - a dark SIDEBAR on the left with all menu links and icons
+     (on a phone, tap the menu button at the top to open it)
+   - a white TOP BAR with the page title, your avatar and a Logout
+     button (students also see a cart button with a counter)
+   - the page content in rounded white cards
+ Dashboards show a coloured welcome banner and STAT CARDS with icon
+ badges (click a card to open that section). All book lists show the
+ BOOK COVER PICTURE.
+
+ Home page (http://localhost/library/) shows a colourful banner, the
+ Student Login form and the book collection with covers.
+ Top links: Home, Login, Register, Admin Panel.
+
+
+---------------------------------------------------------------------
+ PART D : HOW TO USE THE ADMIN MODULE
+---------------------------------------------------------------------
+ 1. Go to  http://localhost/library/admin/
+ 2. Login with   Username: admin     Password: Password@123
+ 3. ADMIN DASHBOARD: welcome banner (today's date, waiting orders,
+    books on loan) and stat cards: Total Books, Books on Loan, Books
+    Returned, Students, Authors, Categories, Book Orders, Pending
+    Orders, Sales Received.
+    Below the cards: Recent Book Issues and Recent Book Orders.
+
+ Sidebar sections:
+   CATALOGUE   : Add Category, Manage Categories, Add Author,
+                 Manage Authors, Add Book, Manage Books
+   CIRCULATION : Issue New Book, Manage Issued Books
+   BOOK STORE  : Book Orders (yellow number = pending orders)
+   STUDENTS    : Registered Students, Search Student
+   ACCOUNT     : Change Password, Logout
+
+ CATEGORIES
+   - Add Category : enter name, Active/Inactive -> Add Category.
+   - Manage Categories : Edit or Delete any category.
+     A category that still has books cannot be deleted.
+
+ AUTHORS
+   - Add Author / Manage Authors (Edit / Delete).
+
+ BOOKS (with picture and stock for sale)
+   - Add Book : Book Name, Category, Author, ISBN (unique),
+     Price, Copies for Sale (0 = not sold in the store) and
+     Book Picture (JPG/PNG/WEBP/GIF, max 2 MB). A preview of the
+     picture appears before you save. Click Add Book.
+   - Manage Books : table with cover picture, price, copies
+     for sale and library status. Edit / Delete buttons.
+   - Edit Book : change any detail, upload a new picture (old one is
+     replaced) or tick "Remove current picture".
+     A book that is currently issued cannot be deleted.
+
+ ISSUE A BOOK TO A STUDENT
+   1. Circulation -> Issue New Book.
+   2. Type the Student ID (e.g. SID10001) - the name appears (AJAX).
+   3. Type the ISBN (e.g. 9780262033848) - the book name appears and
+      shows Available or already Issued (AJAX).
+   4. Return Date is 14 days from today by default -> Issue Book.
+
+ RETURN A BOOK
+   1. Circulation -> Manage Issued Books (filter All / Not Returned /
+      Returned).
+   2. Click "Return Book". Fine is auto-calculated (Rs. 5 per late day).
+   3. Click "Mark as Returned". Return date & time are saved.
+
+ BOOK SALES (orders from students)
+   1. Book Store -> Book Orders. The yellow number in the sidebar
+      (and the box button in the top bar) shows waiting orders.
+   2. Filter by status: Pending, Confirmed, Dispatched, Delivered,
+      Cancelled.
+   3. Click "Manage" on an order to see student details, delivery
+      address, books with covers and the total.
+   4. Update Order: choose Order Status and Payment Status, write a
+      remark for the student -> Update Order.
+        - Delivered  = payment is marked Paid automatically.
+        - Cancelled  = the copies go back into stock automatically.
+        - Delivered and Cancelled orders are final (locked).
+   5. To change stock, open Manage Books -> Edit -> "Copies for Sale".
+
+ STUDENTS
+   - Students -> Registered Students : View / Block / Unblock.
+   - Students -> Search Student : type Student ID, name or email,
+     results appear without reloading (AJAX). View Details shows the
+     profile and full issue history. "Issue Book" issues directly.
+
+ CHANGE PASSWORD / LOGOUT
+   - Account -> Change Password. Logout is in the sidebar and in the
+     top bar.
+
+
+---------------------------------------------------------------------
+ PART E : HOW TO USE THE STUDENT MODULE
+---------------------------------------------------------------------
+ 1. Go to  http://localhost/library/
+
+ Sidebar sections after login:
+   LIBRARY    : Listed Books, Issued Books
+   BOOK STORE : Buy Books, My Cart (yellow number = books in cart),
+                My Orders
+   ACCOUNT    : My Profile, Change Password, Logout
+
+ REGISTER
+   - Click "Register". Fill Full Name, Email, 10-digit Mobile,
+     Password, Confirm Password -> Register.
+   - Your STUDENT ID (e.g. SID45231) is shown. Write it down.
+
+ LOGIN
+   - On the home page enter Student ID (or Email) + Password -> Login.
+   - Demo student :  SID10001  /  Student@123
+
+ STUDENT DASHBOARD
+   - Welcome banner with your Student ID and a Visit Book Store button.
+   - Stat cards: Library Books, Not Returned, Total Issued to Me,
+     My Orders, In My Cart. Then Books Currently With You (with cover)
+     and Recently Added Books.
+
+ LISTED BOOKS
+   - Library -> Listed Books : every book as a card with its cover,
+     author, category, ISBN, price and Available / Issued label.
+   - Type in the search box - cards update instantly (AJAX).
+   - "Buy a Copy" opens the store for that book.
+
+ ISSUED BOOKS
+   - Library -> Issued Books : cover, issue date-time, due date,
+     returned date-time, fine and status.
+
+ BUY BOOKS (Book Store)
+   1. Book Store -> Buy Books. Search by name/author/ISBN or choose a
+      category.
+   2. Each book shows its cover, price and stock ("In stock",
+      "Only 2 left" or "Out of stock").
+   3. Choose quantity and click "Add to Cart". A green message pops up
+      and the cart counters increase (AJAX, no reload).
+      You cannot add more than the stock or more than 5 of one book.
+   4. Book Store -> My Cart : change quantity (total updates instantly)
+      or Remove a book. Click "Proceed to Checkout".
+   5. Checkout : choose payment
+        - Cash on Delivery       (enter your delivery address)
+        - Pay at Library Counter (collect books from the library)
+      Check the contact number -> "Place Order".
+   6. The order page opens with your ORDER NUMBER and a progress bar:
+      Pending -> Confirmed -> Dispatched -> Delivered.
+   7. Book Store -> My Orders : all your orders with payment and order
+      status. "Cancel Order" is available while the order is Pending
+      or Confirmed.
+
+ UPDATE PROFILE / CHANGE PASSWORD
+   - Account -> My Profile (name, mobile). Student ID and Email
+     cannot be changed.
+   - Account -> Change Password.
+
+ RECOVER (FORGOT) PASSWORD
+   - Home page -> "Forgot password?" -> registered Email + Mobile +
+     new password -> Reset Password.
+
+ LOGOUT
+   - Logout in the sidebar or the Logout button in the top bar.
+
+
+---------------------------------------------------------------------
+ PART F : QUICK DEMO FLOW (good for project viva / presentation)
+---------------------------------------------------------------------
+  1. Open the home page - show the book covers and login box.
+  2. Register -> register a new student -> note the Student ID.
+  3. Login -> Dashboard stat cards -> Listed Books (live search).
+  4. Book Store -> Buy Books -> Add to Cart -> My Cart -> change qty
+     -> Checkout -> Place Order -> see order number and progress.
+  5. Open the admin panel in another tab -> login as admin.
+  6. Admin Dashboard -> Book Orders -> Manage the new order ->
+     Confirmed -> Dispatched -> Delivered (payment becomes Paid).
+  7. Student tab -> My Orders -> status is now Delivered / Paid.
+  8. Admin -> Add Category, Add Author, Add Book with a picture.
+  9. Admin -> Issue New Book to the new Student ID + ISBN.
+ 10. Student -> Issued Books shows the book with its cover.
+ 11. Admin -> Manage Issued Books -> Return Book -> Mark as Returned.
+ 12. Admin -> Search Student -> type Student ID -> View Details.
+ A recorded demo is in the "demo video" folder.
+
+
+---------------------------------------------------------------------
+ PROJECT FOLDER STRUCTURE
+---------------------------------------------------------------------
+ library/
+   index.php              Home page + student login + book showcase
+   signup.php             Student registration (generates Student ID)
+   forgot-password.php    Student password recovery
+   dashboard.php          Student dashboard (stat cards)
+   listed-books.php       All books as cover cards (AJAX live search)
+   issued-books.php       Issued books with return date-time
+   buy-books.php          Book Store (buy books)
+   cart.php               Shopping cart
+   checkout.php           Checkout and place order
+   my-orders.php          Orders placed by the student
+   order-details.php      One order with progress bar + cancel
+   my-profile.php         Update profile
+   change-password.php    Student change password
+   logout.php
+   ajax/search-books.php  AJAX book search
+   ajax/cart.php          AJAX add / update / remove cart items
+   includes/config.php    Database settings
+   includes/functions.php Helper functions (icons, covers, orders...)
+   includes/header.php, footer.php   Layout (sidebar + top bar)
+   includes/book-card.php            One book card with cover
+   assets/css/style.css   Stylesheet
+   assets/js/main.js      jQuery / AJAX scripts
+   assets/js/jquery.min.js
+   uploads/books/         Book cover pictures
+   admin/
+     index.php            Admin login
+     dashboard.php        Admin dashboard (stat cards)
+     add-category.php, manage-categories.php, edit-category.php
+     add-author.php,   manage-authors.php,    edit-author.php
+     add-book.php,     manage-books.php,      edit-book.php
+     issue-book.php    Issue book (AJAX student + book lookup)
+     manage-issued-books.php, update-issue.php (return book)
+     manage-orders.php, order-details.php  (book sales)
+     reg-students.php  All students (block / unblock)
+     student-search.php, student-details.php
+     change-password.php, logout.php
+     ajax/get-student.php, get-book.php, search-student.php
+   database/library_db.sql   Database (9 tables) with sample data

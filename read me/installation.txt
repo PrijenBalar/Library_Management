@@ -1,0 +1,196 @@
+=====================================================================
+   ONLINE LIBRARY MANAGEMENT SYSTEM  -  INSTALLATION GUIDE
+   (For a NEW Windows 10 / Windows 11 computer)
+=====================================================================
+
+This guide explains how to set up the project on a fresh Windows PC
+that has nothing installed. Follow the steps in order.
+
+Total time needed : about 10-15 minutes
+Internet needed   : NO - the XAMPP installer is already included
+                    in the "xampp setup" folder of this project.
+
+
+---------------------------------------------------------------------
+ STEP 1 : GET THE XAMPP INSTALLER (already included)
+---------------------------------------------------------------------
+XAMPP gives you Apache (web server), MySQL/MariaDB (database),
+PHP and phpMyAdmin in one installer.
+
+ The installer is ALREADY INCLUDED in this project:
+
+     Library Management System\xampp setup\xampp-windows-x64-8.2.12-installer.exe
+
+   (XAMPP 8.2.12 for Windows 64-bit, PHP 8.2, about 150 MB)
+
+ If you received the project as a ZIP file, first extract it:
+   Right-click "Library Management System.zip"  ->  "Extract All..."
+   ->  Extract.  Then open the extracted folder.
+
+ ONLY if the installer file is missing or damaged, download it again:
+   1. Open Google Chrome / Microsoft Edge.
+   2. Go to :  https://www.apachefriends.org/download.html
+   3. Under "XAMPP for Windows" download PHP 8.2.x (or 8.1.x).
+
+
+---------------------------------------------------------------------
+ STEP 2 : INSTALL XAMPP
+---------------------------------------------------------------------
+ 1. Open the  "xampp setup"  folder and double-click
+       xampp-windows-x64-8.2.12-installer.exe
+    (If Windows SmartScreen shows "Windows protected your PC",
+     click  "More info"  ->  "Run anyway".)
+ 2. If Windows shows "User Account Control - Do you want to allow this
+    app to make changes?" click  YES.
+ 3. If a warning about "UAC (User Account Control)" appears, click OK.
+ 4. Setup wizard :  click  Next.
+ 5. Select Components : keep everything ticked (Apache, MySQL, PHP,
+    phpMyAdmin are required). Click  Next.
+ 6. Installation folder : keep the default   C:\xampp     Click Next.
+ 7. Language : English.  Click  Next.
+ 8. Click  Next  again and wait for installation to complete (2-5 min).
+ 9. On the last screen keep "Do you want to start the Control Panel now?"
+    ticked and click  Finish.
+10. If Windows Defender Firewall asks "Allow Apache HTTP Server to
+    communicate on these networks?" tick BOTH Private and Public
+    networks and click  "Allow access".  Do the same for mysqld.
+
+
+---------------------------------------------------------------------
+ STEP 3 : START APACHE AND MYSQL
+---------------------------------------------------------------------
+ 1. Open  XAMPP Control Panel
+    (Start Menu  ->  type "XAMPP"  ->  click XAMPP Control Panel).
+    TIP: Right-click it and choose "Run as administrator" to avoid
+    permission problems.
+ 2. Click the  Start  button in the  Apache  row.
+    The Apache row becomes GREEN and shows ports 80, 443.
+ 3. Click the  Start  button in the  MySQL  row.
+    The MySQL row becomes GREEN and shows port 3306.
+ 4. Test it : open a browser and go to    http://localhost
+    You should see the XAMPP welcome page.
+
+ If Apache does NOT start (shows red error about port 80), see the
+ TROUBLESHOOTING section at the bottom.
+
+
+---------------------------------------------------------------------
+ STEP 4 : COPY THE PROJECT FILES
+---------------------------------------------------------------------
+ 1. Open the project folder you received
+    (Library Management System - the extracted ZIP folder).
+    Inside it you will find a folder named   library
+ 2. Copy the whole  "library"  folder.
+ 3. Open  File Explorer  and go to :   C:\xampp\htdocs
+ 4. Paste the  "library"  folder there.
+
+ After this step the path must look EXACTLY like :
+        C:\xampp\htdocs\library\index.php
+        C:\xampp\htdocs\library\admin\index.php
+        C:\xampp\htdocs\library\database\library_db.sql
+
+ (Do NOT rename the folder, otherwise the URL in "how to run.txt"
+  will not work.)
+
+ Book cover pictures are inside  C:\xampp\htdocs\library\uploads\books
+ Keep this folder - pictures uploaded by the admin are saved here.
+
+
+---------------------------------------------------------------------
+ STEP 5 : CREATE THE DATABASE (IMPORT library_db.sql)
+---------------------------------------------------------------------
+ 1. Make sure MySQL is running (green) in XAMPP Control Panel.
+ 2. Open a browser and go to :      http://localhost/phpmyadmin
+ 3. On the left side click   "New".
+ 4. Database name :  library_db
+    Collation     :  utf8mb4_general_ci   (or leave default)
+    Click  Create.
+ 5. Click on the database  "library_db"  in the left panel.
+ 6. Click the  "Import"  tab at the top.
+ 7. Click  "Choose File"  and select :
+        C:\xampp\htdocs\library\database\library_db.sql
+ 8. Scroll down and click  "Import"  (or "Go").
+ 9. You should see a green message
+    "Import has been successfully finished".
+    The left panel now shows 9 tables :
+        admin, tblauthors, tblbooks, tblcart, tblcategory,
+        tblissuedbookdetails, tblorderitems, tblorders, tblstudents
+
+ NOTE: The .sql file also contains "CREATE DATABASE IF NOT EXISTS",
+ so you can even skip step 3-4 and import directly from the
+ phpMyAdmin home page - both ways work.
+
+
+---------------------------------------------------------------------
+ STEP 6 : CHECK DATABASE SETTINGS (usually nothing to change)
+---------------------------------------------------------------------
+ The database connection settings are in :
+        C:\xampp\htdocs\library\includes\config.php
+
+        DB_HOST = localhost
+        DB_USER = root
+        DB_PASS =            (empty - this is the XAMPP default)
+        DB_NAME = library_db
+
+ A fresh XAMPP install uses user "root" with NO password, so you do
+ not need to change anything. Only edit this file if you have set a
+ MySQL root password yourself.
+
+
+---------------------------------------------------------------------
+ STEP 7 : OPEN THE WEBSITE
+---------------------------------------------------------------------
+ Student side :   http://localhost/library/
+ Admin side   :   http://localhost/library/admin/
+
+ Login details are in  "read me/pass.txt".
+ How to use every feature is in  "read me/how to run.txt".
+
+ INSTALLATION COMPLETE!
+
+
+---------------------------------------------------------------------
+ TROUBLESHOOTING
+---------------------------------------------------------------------
+ PROBLEM : Apache does not start / "Port 80 in use"
+ FIX     : Another program (Skype, IIS, VMware, Windows "World Wide Web
+           Publishing Service") is using port 80.
+           Option A - Stop the other program:
+               Press Win+R, type  services.msc , find
+               "World Wide Web Publishing Service", right-click -> Stop.
+           Option B - Change Apache port:
+               In XAMPP Control Panel click  Config  (Apache row)
+               -> Apache (httpd.conf). Change  "Listen 80"  to
+               "Listen 8080"  and  "ServerName localhost:80"  to
+               "ServerName localhost:8080". Save and Start Apache.
+               Then use  http://localhost:8080/library/  instead.
+
+ PROBLEM : MySQL does not start / "Port 3306 in use"
+ FIX     : Another MySQL is already installed and running. Press Win+R,
+           type  services.msc , find "MySQL" or "MySQL80", right-click
+           -> Stop. Then Start MySQL from XAMPP again.
+
+ PROBLEM : "Database connection failed" message on the website
+ FIX     : 1) MySQL is not started in XAMPP - start it.
+           2) The database was not imported - repeat Step 5.
+           3) You have a MySQL password - put it in config.php (Step 6).
+
+ PROBLEM : "Object not found! Error 404"
+ FIX     : The folder is not in the right place. Check that the file
+           C:\xampp\htdocs\library\index.php   exists (Step 4).
+
+ PROBLEM : phpMyAdmin shows "#1050 Table already exists" during import
+ FIX     : The database was imported before. Just ignore, or drop the
+           database (left panel -> library_db -> Operations -> Drop)
+           and import again.
+
+ PROBLEM : Windows SmartScreen blocks the XAMPP installer
+ FIX     : Click "More info"  ->  "Run anyway".
+
+ PROBLEM : Book pictures do not show / "Could not save the image"
+ FIX     : Make sure the folder  C:\xampp\htdocs\library\uploads\books
+           exists and was copied with the project.
+
+ PROBLEM : Page shows PHP code instead of the website
+ FIX     : You opened the file by double-clicking it (file:///...).
+           Always open it through the browser using  http://localhost/...

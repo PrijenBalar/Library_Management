@@ -1,0 +1,69 @@
+=====================================================================
+   ONLINE LIBRARY MANAGEMENT SYSTEM  -  LOGIN DETAILS (pass)
+=====================================================================
+
+---------------------------------------------------------------------
+ 1. ADMIN PANEL
+---------------------------------------------------------------------
+ URL       :  http://localhost/library/admin/
+ Username  :  admin
+ Password  :  Password@123
+
+ (Change it after login from  Account -> Change Password  in the sidebar)
+
+
+---------------------------------------------------------------------
+ 2. STUDENT / CLIENT LOGIN  (sample accounts from the database)
+---------------------------------------------------------------------
+ URL       :  http://localhost/library/
+
+ Student 1 (has 1 book issued, 1 returned, 1 delivered order)
+   Student ID :  SID10001
+   Email      :  rahul@example.com
+   Mobile     :  9876543210
+   Password   :  Student@123
+
+ Student 2 (has 1 overdue book, 1 returned, 1 pending order)
+   Student ID :  SID10002
+   Email      :  priya@example.com
+   Mobile     :  9123456780
+   Password   :  Student@123
+
+ Student 3 (BLOCKED account - for testing block feature)
+   Student ID :  SID10003
+   Email      :  amit@example.com
+   Mobile     :  9988776655
+   Password   :  Student@123
+
+ You can login with either the Student ID or the Email.
+ New students can register themselves from the "Register" page and
+ will receive a new Student ID automatically.
+
+
+---------------------------------------------------------------------
+ 3. DATABASE (phpMyAdmin / MySQL)
+---------------------------------------------------------------------
+ URL            :  http://localhost/phpmyadmin
+ Host           :  localhost
+ Database name  :  library_db
+ Username       :  root
+ Password       :  (leave empty - XAMPP default)
+
+ These are stored in :  library/includes/config.php
+
+
+---------------------------------------------------------------------
+ 4. OTHER SETTINGS
+---------------------------------------------------------------------
+ Default issue period :  14 days      (ISSUE_DAYS in includes/functions.php)
+ Fine after due date  :  Rs. 5 / day  (FINE_PER_DAY in includes/functions.php)
+
+ BOOK STORE (book selling module)
+ Payment methods      :  Cash on Delivery, Pay at Library Counter
+                         (no online payment - no card details needed)
+ Max copies per book  :  5 per order  (MAX_QTY_PER_BOOK in includes/functions.php)
+ Sample orders        :  ORD100001 (SID10001, Delivered, Paid)
+                         ORD100002 (SID10002, Pending, Unpaid)
+
+ NOTE: All passwords are stored in the database in encrypted
+ (bcrypt hashed) form, not as plain text.
